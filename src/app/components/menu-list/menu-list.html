@@ -1,0 +1,31 @@
+<div class="flex space-x-1">
+
+    @if(permissaoNovo){
+    <div class="pt-2">
+        <a pButton class="p-button-info w-30" icon="pi pi-plus" label="Incluir"
+            (click)="novo()"></a>
+    </div>
+    }
+
+    @if(permissaoEditar){
+    <div class="pt-2">
+        <a pButton class="p-button-success w-30" icon="pi pi-pencil" label="Alterar"
+            (click)="existeItemSelecionado('editar')"></a>
+    </div>
+    }
+
+    @if(permissaoConsultar){
+    <div class="pt-2">
+        <a pButton class="p-button-warn w-30" icon="pi pi-eye" label="Consultar"
+            (click)="existeItemSelecionado('consultar')"></a>
+    </div>
+    }
+
+    @if(permissaoExcluir){
+    <div class="pt-2">
+        <a pButton class="p-button-danger w-30" icon="pi pi-trash" label="Excluir"
+            (click)="existeItemSelecionado('excluir')"></a>
+    </div>
+    }
+
+</div>

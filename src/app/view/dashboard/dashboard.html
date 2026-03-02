@@ -1,0 +1,67 @@
+<div class="ajustes-breadcrumb mb-4">
+    <p-breadcrumb [model]="itens"></p-breadcrumb>
+</div>
+
+<div class="grid grid-cols-12 gap-4 mt-5">
+        
+    <div class="col-span-12 lg:col-span-4 xl:col-span-3">
+        <div class="card mb-0">
+            <div class="flex justify-between">
+                <div>
+                    <span class="block text-muted-color font-medium mb-4">Pesquisas realizadas</span>
+                    <div class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{ totalPesquisas }}</div>
+                </div>
+                <div class="flex items-center justify-center bg-blue-100 dark:bg-blue-400/10 rounded-border" style="width: 2.5rem; height: 2.5rem">
+                    <i class="pi pi-users text-blue-500 text-xl!"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-12 lg:col-span-4 xl:col-span-3">
+        <div class="card mb-0">
+            <div class="flex justify-between">
+                <div>
+                    <span class="block text-muted-color font-medium mb-4">Pesquisas finalizadas</span>
+                    <div class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{ totalPesquisaFinalizadas}}</div>
+                </div>
+                <div class="flex items-center justify-center bg-blue-100 dark:bg-blue-400/10 rounded-border" style="width: 2.5rem; height: 2.5rem">
+                    <i class="pi pi-check-circle text-green-500 text-xl!"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-12 lg:col-span-4 xl:col-span-3">
+        <div class="card mb-0">
+            <div class="flex justify-between">
+                <div>
+                    <span class="block text-muted-color font-medium mb-4">Pesquisas pendentes</span>
+                    <div class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{ totalPesquisaPendente }}</div>
+                </div>
+                <div class="flex items-center justify-center bg-blue-100 dark:bg-blue-400/10 rounded-border" style="width: 2.5rem; height: 2.5rem">
+                    <i class="pi pi-times-circle text-red-500 text-xl!"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-12 lg:col-span-4 xl:col-span-3">
+        <div class="card mb-0">
+            <div class="flex justify-between">
+                <div>
+                    <span class="block text-muted-color font-medium mb-4">Média ultima pesquisa realizada</span>
+                    @if(mediaUltimaPesquisa){
+                        <div class="text-surface-900 dark:text-surface-0 font-medium text-xl">{{mediaUltimaPesquisa | number: '1.2-2':'pt-BR'}}</div>
+                    }@else {
+                        <div class="text-surface-900 dark:text-surface-0 font-medium">Não foi realizada nenhuma pesquisa</div>
+                    }
+                </div>
+                <div class="flex items-center justify-center bg-blue-100 dark:bg-blue-400/10 rounded-border" style="width: 2.5rem; height: 2.5rem">
+                    <i class="pi pi-gauge text-green-500 text-xl!"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

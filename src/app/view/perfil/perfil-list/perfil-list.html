@@ -1,0 +1,71 @@
+<p-breadcrumb [model]="itemsBreadCrumb"></p-breadcrumb>
+
+<app-menu-list [rotaPadrao]="rotaPadrao" [idEntidade]="idEntidade"
+    [permissaoNovo]="authorizationService.temPermissao('PERFIL_INCLUIR')"
+    [permissaoEditar]="authorizationService.temPermissao('PERFIL_ALTERAR')"
+    [permissaoConsultar]="authorizationService.temPermissao('PERFIL_CONSULTAR')"
+    [permissaoExcluir]="authorizationService.temPermissao('PERFIL_EXCLUIR')">
+</app-menu-list>
+
+<div class="py-3">
+
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+        <p-fieldset legend="Filtro" [toggleable]="true" [collapsed]="true">
+
+            <p-fluid>
+
+                <div class="grid grid-cols-12 gap-2">
+
+                    <div class="col-span-12 md:col-span-1">
+                        <label for="id">ID</label>
+                        <input id="id" name="id" pInputText type="text"
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="filtro.id">
+                    </div>
+
+                    <div class="col-span-12 md:col-span-5">
+                        <label for="descricao">Descrição</label>
+                        <input id="descricao" name="descricao" pInputText type="text" [(ngModel)]="filtro.descricao"
+                            maxlength="100">
+                    </div>
+
+                </div>
+
+                <div class="grid grid-cols-12 gap-2 pt-2">
+                    <button pButton type="submit" label="Pesquisar" class="p-button-info botao-filtro botao-menu"></button>
+                    <button pButton type="button" label="Limpar" class="p-button-info botao-filtro botao-menu" (click)="limparFiltro()"></button>
+                </div>
+
+            </p-fluid>
+
+        </p-fieldset>
+
+    </form>
+
+</div>
+
+<div class="grid grid-row-12">
+    <p-table [value]="selecionados" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true"
+        [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela [showCurrentPageReport]="true"
+        currentPageReportTemplate="Total de registros: {totalRecords}" [rowsPerPageOptions]="[10,15,20,25,30]">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:10%">ID</th>
+                <th style="width:90%">Descrição</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-entidade>
+            <tr (click)="selecionarEntidade(entidade)" [class]="entidade.id == idEntidade ?'linha-selecao-tabela':null">
+                <td>{{entidade.id}}</td>
+                <td>{{entidade.descricao}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="6">
+                    Nenhum registro encontrado
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

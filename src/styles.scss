@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+@use '../src/assets/layout/layout.scss';
+@use '../src/assets/tailwind.css';
+@use 'primeicons/primeicons.css';
+@use '@fortawesome/fontawesome-free/css/all.css';
+
+
+/* Inicio Campos Invalidos  */
+.campoInvalido input{
+  border: 1px solid red !important;
+}
+
+.campoInvalido label{
+  color: red !important;
+}
+
+.campoInvalido textarea{
+  border: 1px solid red !important;
+}
+
+.campoInvalido .p-select{
+  border: 1px solid red !important;
+  padding: 0px !important;
+}
+
+.p-breadcrumb {
+    background: var(--p-breadcrumb-background);
+    padding: 6px !important;
+    overflow-x: auto;
+    font-size: small;
+    border: 1px solid #c8c8c8;
+    border-radius: 5px;
+}
+
+.linha-selecao-tabela {
+  background-color: #2184b9 !important;
+  color: #FFF !important;
+  font-weight: 600;
+}
+
+.p-datatable-thead > tr > th {
+    padding: 6px !important;
+    border-style: solid;
+    text-align: start;
+    font-size: small;
+    font-weight: 700 !important;
+}
+
+.p-datatable-tbody > tr > td {
+  padding: 6px !important;
+  text-align: left;
+  border: 1px solid #e9ecef;
+  border-width: 1px 1px 1px 1px;
+}

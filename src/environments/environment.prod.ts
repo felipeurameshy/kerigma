@@ -1,0 +1,17 @@
+export const environment = {
+  production: false,
+  redirectURI: 'https://sin.seinfra.ce.gov.br/admin/authorized',
+  authorizationCallbackUrl: 'https://sin.seinfra.ce.gov.br/oauth2/authorize',
+  tokenUrl: "https://sin.seinfra.ce.gov.br/oauth2/token",
+  logoutUrl: "https://sin.seinfra.ce.gov.br/logout",
+  logoutRedirectUrl: "https://sin.seinfra.ce.gov.br/sgti/login",
+  apiUrl: 'https://sin.seinfra.ce.gov.br/sgti-api/api', 
+  tokenAllowedDomains: ['https://sin.seinfra.ce.gov.br'],
+  tokenDisallowedRoutes: ['/oauth2/token'],
+  responseType: 'code',
+  clientId: 'sgti-client',
+  secret: 'manga', 
+  scope: 'openid',
+  tokenRevokeUrl: "https://sin.seinfra.ce.gov.br/oauth2/revoke",
+  responseMode: 'form_post',
+};

@@ -1,0 +1,62 @@
+<form #formulario="ngForm" autocomplete="off">
+
+    <app-menu-form [rotaListar]="rotaListar" [tipoMenu]="tipoMenu" [formulario]="formulario" (salvar)="salvar($event)"
+        (excluir)="excluir()" [itemsBreadCrumb]="items">
+    </app-menu-form>
+
+    <p-fieldset legend="Dados">
+
+        <p-fluid>
+
+            <div class="grid grid-cols-12 gap-2">
+
+                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && formulario.form.controls['cpf'].invalid? 'campoInvalido':'campoValido'">
+                    <label for="cpf">Cpf<span class="text-red-600">*</span></label>
+                    <p-inputMask id="cpf" name="cpf" [(ngModel)]="entidade.cpf" [unmask]="true"
+                        [required]="true" mask="999.999.999-99" [disabled]="consulta"></p-inputMask>
+                </div>
+
+                <div class="col-span-12 md:col-span-5" [ngClass]="formularioInvalido && formulario.form.controls['nome'].invalid? 'campoInvalido':'campoValido'">
+                    <label for="nome">Nome<span class="text-red-600">*</span></label>
+                    <input id="nome" pInputText type="text" name="nome" [(ngModel)]="entidade.nome"
+                        [disabled]="consulta" required minlength="3" maxlength="100">
+                </div>
+
+                <div class="col-span-12 md:col-span-5" [ngClass]="formularioInvalido && formulario.form.controls['email'].invalid? 'campoInvalido':'campoValido'">
+                    <label for="email">E-mail<span class="text-red-600">*</span></label>
+                    <input id="email" pInputText type="text" name="email" [(ngModel)]="entidade.email"
+                        [disabled]="consulta" required minlength="3" maxlength="120">
+                </div>
+
+                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.status? 'campoInvalido' : 'campoValido'">
+                    <label>Status<span class="text-red-600">*</span></label>
+                    <p-select [options]="tiposStatus" [filter]="false" placeholder="Selecione" [required]="true"
+                        name="status" [(ngModel)]="entidade.status" [disabled]="consulta">
+                    </p-select>
+                </div>
+
+                <div class="col-span-12 md:col-span-4" [ngClass]="formularioInvalido && !entidade.perfil? 'campoInvalido' : 'campoValido'">
+                    <label>Perfil<span class="text-red-600">*</span></label>
+                    <p-autocomplete [(ngModel)]="entidade.perfil" [suggestions]="listaPerfis" optionLabel="descricao" [dropdown]="true"
+                        name="perfil" placeholder="Buscar" (completeMethod)="pesquisarPerfil($event)" required="true"/>
+                </div>
+
+                <div class="col-span-12 md:col-span-3" [ngClass]="formularioInvalido && formulario.form.controls['senha'].invalid? 'campoInvalido':'campoValido'">
+                    <label for="senha">Senha<span class="text-red-600">*</span></label>
+                    <input id="senha" pPassword type="password" name="senha"
+                        [(ngModel)]="entidade.senha" [disabled]="consulta" required minlength="4" maxlength="100">
+                </div>
+
+                <div class="col-span-12 md:col-span-3" [ngClass]="formularioInvalido && formulario.form.controls['senhaConfirma'].invalid? 'campoInvalido':'campoValido'">
+                    <label for="senhaConfirma">Confirmar Senha<span class="text-red-600">*</span></label>
+                    <input id="senhaConfirma" pPassword type="password" name="senhaConfirma"
+                        [(ngModel)]="senhaConfirma" [disabled]="consulta" required minlength="4" maxlength="100">
+                </div>
+
+            </div>
+
+        </p-fluid>
+
+    </p-fieldset>
+
+</form>
