@@ -1,0 +1,33 @@
+<form #formulario="ngForm" autocomplete="off">
+
+    <app-menu-form [rotaListar]="rotaListar" [tipoMenu]="tipoMenu" [formulario]="formulario" (salvar)="salvar($event)"
+        (excluir)="excluir()" [itemsBreadCrumb]="items">
+    </app-menu-form>
+
+    <p-fieldset legend="Dados">
+
+        <p-fluid>
+
+            <div class="grid grid-cols-12 gap-2">
+
+                <div class="col-span-12 md:col-span-6"
+                    [ngClass]="formularioInvalido && formulario.form.controls['nome'].invalid? 'campoInvalido':'campoValido'">
+                    <label for="nome">Nome<span class="text-red-600">*</span></label>
+                    <input id="nome" pInputText type="text" name="nome" [(ngModel)]="entidade.nome"
+                        [disabled]="consulta" required minlength="3" maxlength="200">
+                </div>
+
+                <!--<div class="col-span-12 md:col-span-3" [ngClass]="formularioInvalido && !entidade.tipo ? 'campoInvalido' : 'campoValido'">
+                    <label>Tipo<span class="text-red-600">*</span></label>
+                    <p-select [options]="tipos" [filter]="false" placeholder="Selecione" [required]="true"
+                        name="tipo" [(ngModel)]="entidade.tipo" [disabled]="consulta">
+                    </p-select>
+                </div>-->
+
+            </div>
+
+        </p-fluid>
+
+    </p-fieldset>
+
+</form>

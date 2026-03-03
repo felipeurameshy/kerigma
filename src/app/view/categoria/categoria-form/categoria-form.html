@@ -17,6 +17,13 @@
                         [disabled]="consulta" required minlength="3" maxlength="120">
                 </div>
 
+                <div class="col-span-12 md:col-span-3" [ngClass]="formularioInvalido && !entidade.tipo ? 'campoInvalido' : 'campoValido'">
+                    <label>Tipo<span class="text-red-600">*</span></label>
+                    <p-select [options]="tipos" [filter]="false" placeholder="Selecione" [required]="true"
+                        name="tipo" [(ngModel)]="entidade.tipo" [disabled]="consulta">
+                    </p-select>
+                </div>
+
             </div>
 
         </p-fluid>

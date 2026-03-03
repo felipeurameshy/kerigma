@@ -5,4 +5,10 @@ export class Enums {
     { label: 'Inativo', value: 'INATIVO' }
   ];
 
+  public static TipoCategoria = [
+    { label: 'Despesa', value: 'DESPESA' },
+    { label: 'Receita', value: 'RECEITA' }
+  ];
+
+
 }

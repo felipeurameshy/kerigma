@@ -36,7 +36,10 @@ export class AppMenu {
                 label: 'Cadastro',
                 visible: this.authorizationService.temPermissao('MENU_CADASTRO'),
                 items: [
-                    { label: 'Cargo', icon: 'pi pi-fw pi-id-card', routerLink: ['/cargo/listar'], visible: this.authorizationService.temPermissao('CARGO_CONSULTAR') }
+                    { label: 'Bairro', icon: 'pi pi-fw pi-id-card', routerLink: ['/bairro/listar'], visible: this.authorizationService.temPermissao('BAIRRO_CONSULTAR') },
+                    { label: 'Cargo', icon: 'pi pi-fw pi-id-card', routerLink: ['/cargo/listar'], visible: this.authorizationService.temPermissao('CARGO_CONSULTAR') },
+                    { label: 'Categoria', icon: 'pi pi-fw pi-id-card', routerLink: ['/categoria/listar'], visible: this.authorizationService.temPermissao('CATEGORIA_CONSULTAR') },
+                    { label: 'Pessoa', icon: 'pi pi-fw pi-id-card', routerLink: ['/pessoa/listar'], visible: this.authorizationService.temPermissao('PESSOA_CONSULTAR') }
                 ]
             },
             {
