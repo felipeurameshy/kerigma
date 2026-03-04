@@ -17,12 +17,76 @@
                         [disabled]="consulta" required minlength="3" maxlength="200">
                 </div>
 
-                <!--<div class="col-span-12 md:col-span-3" [ngClass]="formularioInvalido && !entidade.tipo ? 'campoInvalido' : 'campoValido'">
-                    <label>Tipo<span class="text-red-600">*</span></label>
-                    <p-select [options]="tipos" [filter]="false" placeholder="Selecione" [required]="true"
-                        name="tipo" [(ngModel)]="entidade.tipo" [disabled]="consulta">
+                <div class="col-span-12 md:col-span-2">
+                    <label for="cpf">Cpf</label>
+                    <p-inputMask id="cpf" name="cpf" [(ngModel)]="entidade.cpf" [unmask]="true"
+                        mask="999.999.999-99" [disabled]="consulta"></p-inputMask>
+                </div>                
+
+                <div class="col-span-12 md:col-span-2">
+                    <label for="rg">RG</label>
+                    <input id="rg" pInputText type="text" name="rg" [(ngModel)]="entidade.rg"
+                        [disabled]="consulta" minlength="3" maxlength="20">
+                </div>
+
+                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.estadoCivil? 'campoInvalido' : 'campoValido'">
+                    <label>Status Civil<span class="text-red-600">*</span></label>
+                    <p-select [options]="tiposEstadoCivil" [filter]="false" placeholder="Selecione" [required]="true"
+                        name="estadoCivil" [(ngModel)]="entidade.estadoCivil" [disabled]="consulta">
                     </p-select>
-                </div>-->
+                </div>
+
+                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.sexo? 'campoInvalido' : 'campoValido'">
+                    <label>Sexo<span class="text-red-600">*</span></label>
+                    <p-select [options]="tiposSexo" [filter]="false" placeholder="Selecione" [required]="true"
+                        name="sexo" [(ngModel)]="entidade.sexo" [disabled]="consulta">
+                    </p-select>
+                </div>
+
+                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.dizimista? 'campoInvalido' : 'campoValido'">
+                    <label>Dizimista<span class="text-red-600">*</span></label>
+                    <p-select [options]="tiposDizimos" [filter]="false" placeholder="Selecione" [required]="true"
+                        name="dizimista" [(ngModel)]="entidade.dizimista" [disabled]="consulta">
+                    </p-select>
+                </div>
+
+                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.status? 'campoInvalido' : 'campoValido'">
+                    <label>Status<span class="text-red-600">*</span></label>
+                    <p-select [options]="tiposStatus" [filter]="false" placeholder="Selecione" [required]="true"
+                        name="status" [(ngModel)]="entidade.status" [disabled]="consulta">
+                    </p-select>
+                </div>
+
+            </div>
+
+        </p-fluid>
+
+    </p-fieldset>
+
+    <p-fieldset legend="Endereço">
+
+        <p-fluid>
+
+            <div class="grid grid-cols-12 gap-2">
+
+                <div class="col-span-12 md:col-span-3">
+                    <label>Bairro</label>
+                    <p-autocomplete [(ngModel)]="entidade.bairro" [suggestions]="listaBairros" optionLabel="descricao" [dropdown]="true" required="true"
+                        name="cargo" placeholder="Buscar" (completeMethod)="pesquisarCargo($event)" [disabled]="consulta"/>
+                </div>
+
+                <div class="col-span-12 md:col-span-6">
+                    <label for="endereco">Endereço<span class="text-red-600">*</span></label>
+                    <input id="endereco" pInputText type="text" name="endereco" [(ngModel)]="entidade.endereco"
+                        [disabled]="consulta" minlength="3" maxlength="100">
+                </div>
+
+                <div class="col-span-12 md:col-span-2">
+                    <label for="telefoneResidencial">Tel. Residencial</label>
+                    <p-inputMask id="telefoneResidencial" name="telefoneResidencial" [(ngModel)]="entidade.telefoneResidencial" [unmask]="true"
+                        mask="9999.9999" [disabled]="consulta"></p-inputMask>
+                </div>
+                
 
             </div>
 

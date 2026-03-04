@@ -13,6 +13,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ToastModule } from 'primeng/toast';
 import { FluidModule } from 'primeng/fluid';
 import { SelectModule } from 'primeng/select';
+import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
 
 import { BaseResourceFormComponent } from '../../../configuration/generic/components/base-resource-form.component';
 import { ErrorHandlerService } from '../../../configuration/core/error-handler.service';
@@ -21,18 +22,29 @@ import { LoadingService } from '../../../configuration/core/loading.service';
 import { Enums } from '../../../model/enums';
 import { Pessoa } from '../../../model/pessoa';
 import { PessoaService } from '../../../service/pessoa.service';
+import { Bairro } from '../../../model/bairro';
+import { BairroService } from '../../../service/bairro.service';
+import { BairroFilter } from '../../../filter/bairro.filter';
 
 @Component({
   selector: 'app-pessoa-form',
   imports: [FormsModule, CommonModule, MenuForm, InputTextModule, ButtonModule, TooltipModule,
-    FieldsetModule, BreadcrumbModule, ToastModule, FluidModule, SelectModule],
+    FieldsetModule, BreadcrumbModule, ToastModule, FluidModule, SelectModule, AutoCompleteModule],
   templateUrl: './pessoa-form.html',
   styleUrl: './pessoa-form.scss',
 })
 export class PessoaForm extends BaseResourceFormComponent<Pessoa> {
 
+  public tiposEstadoCivil = Enums.EstadoCivil;
+  public tiposSexo = Enums.Sexo;
+  public tiposDizimos = Enums.Dizimista;
+  public tiposStatus = Enums.StatusPadrao;
+
+  public listaBairros: Bairro[] = [];
+
   constructor(
     entidadeService: PessoaService,
+    private bairroService: BairroService,
     route: ActivatedRoute,
     router: Router,
     messageService: MessageService,
@@ -53,6 +65,24 @@ export class PessoaForm extends BaseResourceFormComponent<Pessoa> {
       loadingService,
       confirmation
     );
+  }
+
+  public pesquisarBairro(event: AutoCompleteCompleteEvent){
+    const filtro = new BairroFilter();
+    filtro.descricao = event.query;
+    filtro.itensPorPagina = 10;
+    this.bairroService.pesquisar(filtro)
+      .then( dados => {
+        if(dados.selecionados){
+          this.listaBairros = dados.selecionados.map((item: any) => ({
+            id: item.id,
+            descricao: item.descricao
+          }));
+        }
+      })
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+      });
   }
 
 }
