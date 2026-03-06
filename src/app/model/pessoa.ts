@@ -1,3 +1,4 @@
+import { Bairro } from "./bairro";
 import { Cargo } from "./cargo";
 
 export class Pessoa {
@@ -11,7 +12,7 @@ export class Pessoa {
     dizimista!: string; //DizimistaEnum
     status!: string; //StatusEnum
     endereco!: string;
-    bairro!: string;
+    bairro!: Bairro;
     telefoneResidencial!: string;
     telefoneCelular01!: string;
     telefoneCelular02!: string;

@@ -4,94 +4,169 @@
         (excluir)="excluir()" [itemsBreadCrumb]="items">
     </app-menu-form>
 
-    <p-fieldset legend="Dados">
+    <div class="grid gap-2">
 
-        <p-fluid>
+        <p-fieldset legend="Dados">
 
-            <div class="grid grid-cols-12 gap-2">
+            <p-fluid>
 
-                <div class="col-span-12 md:col-span-6"
-                    [ngClass]="formularioInvalido && formulario.form.controls['nome'].invalid? 'campoInvalido':'campoValido'">
-                    <label for="nome">Nome<span class="text-red-600">*</span></label>
-                    <input id="nome" pInputText type="text" name="nome" [(ngModel)]="entidade.nome"
-                        [disabled]="consulta" required minlength="3" maxlength="200">
+                <div class="grid grid-cols-12 gap-2">
+
+                    <div class="col-span-12 md:col-span-6"
+                        [ngClass]="formularioInvalido && formulario.form.controls['nome'].invalid? 'campoInvalido':'campoValido'">
+                        <label for="nome">Nome<span class="text-red-600">*</span></label>
+                        <input id="nome" pInputText type="text" name="nome" [(ngModel)]="entidade.nome"
+                            [disabled]="consulta" required minlength="3" maxlength="200">
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="cpf">Cpf</label>
+                        <p-inputMask id="cpf" name="cpf" [(ngModel)]="entidade.cpf" [unmask]="true"
+                            mask="999.999.999-99" [disabled]="consulta"></p-inputMask>
+                    </div>                
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="rg">RG</label>
+                        <input id="rg" pInputText type="text" name="rg" [(ngModel)]="entidade.rg"
+                            [disabled]="consulta" minlength="3" maxlength="20">
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.estadoCivil? 'campoInvalido' : 'campoValido'">
+                        <label>Status Civil<span class="text-red-600">*</span></label>
+                        <p-select [options]="tiposEstadoCivil" [filter]="false" placeholder="Selecione" [required]="true"
+                            name="estadoCivil" [(ngModel)]="entidade.estadoCivil" [disabled]="consulta">
+                        </p-select>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.sexo? 'campoInvalido' : 'campoValido'">
+                        <label>Sexo<span class="text-red-600">*</span></label>
+                        <p-select [options]="tiposSexo" [filter]="false" placeholder="Selecione" [required]="true"
+                            name="sexo" [(ngModel)]="entidade.sexo" [disabled]="consulta">
+                        </p-select>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.dizimista? 'campoInvalido' : 'campoValido'">
+                        <label>Dizimista<span class="text-red-600">*</span></label>
+                        <p-select [options]="tiposDizimos" [filter]="false" placeholder="Selecione" [required]="true"
+                            name="dizimista" [(ngModel)]="entidade.dizimista" [disabled]="consulta">
+                        </p-select>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-6">
+                        <label for="observacao">Observação</label>
+                        <input id="observacao" pInputText type="text" name="observacao" [(ngModel)]="entidade.observacao"
+                            [disabled]="consulta" minlength="3" maxlength="200">
+                    </div>
+
                 </div>
 
-                <div class="col-span-12 md:col-span-2">
-                    <label for="cpf">Cpf</label>
-                    <p-inputMask id="cpf" name="cpf" [(ngModel)]="entidade.cpf" [unmask]="true"
-                        mask="999.999.999-99" [disabled]="consulta"></p-inputMask>
-                </div>                
+            </p-fluid>
 
-                <div class="col-span-12 md:col-span-2">
-                    <label for="rg">RG</label>
-                    <input id="rg" pInputText type="text" name="rg" [(ngModel)]="entidade.rg"
-                        [disabled]="consulta" minlength="3" maxlength="20">
+        </p-fieldset>
+
+        <p-fieldset legend="Contatos">
+
+            <p-fluid>
+
+                <div class="grid grid-cols-12 gap-2">
+
+                    <div class="col-span-12 md:col-span-6">
+                        <label for="email">E-mail<span class="text-red-600">*</span></label>
+                        <input id="email" pInputText type="text" name="email" [(ngModel)]="entidade.email"
+                            [disabled]="consulta" minlength="3" maxlength="200">
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="telefoneResidencial">Tel. Residencial</label>
+                        <p-inputMask id="telefoneResidencial" name="telefoneResidencial" [(ngModel)]="entidade.telefoneResidencial" [unmask]="true"
+                            mask="(99) 9999.9999" [disabled]="consulta"></p-inputMask>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="telefoneCelular01">Tel. Celular 01</label>
+                        <p-inputMask id="telefoneCelular01" name="telefoneCelular01" [(ngModel)]="entidade.telefoneCelular01" [unmask]="true"
+                            mask="(99) 99999.9999" [disabled]="consulta"></p-inputMask>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="telefoneCelular02">Tel. Celular 02</label>
+                        <p-inputMask id="telefoneCelular02" name="telefoneCelular02" [(ngModel)]="entidade.telefoneCelular02" [unmask]="true"
+                            mask="(99) 99999.9999" [disabled]="consulta"></p-inputMask>
+                    </div>
+
                 </div>
 
-                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.estadoCivil? 'campoInvalido' : 'campoValido'">
-                    <label>Status Civil<span class="text-red-600">*</span></label>
-                    <p-select [options]="tiposEstadoCivil" [filter]="false" placeholder="Selecione" [required]="true"
-                        name="estadoCivil" [(ngModel)]="entidade.estadoCivil" [disabled]="consulta">
-                    </p-select>
+            </p-fluid>
+
+        </p-fieldset>
+
+        <p-fieldset legend="Endereço">
+
+            <p-fluid>
+
+                <div class="grid grid-cols-12 gap-2">
+
+                    <div class="col-span-12 md:col-span-3">
+                        <label>Bairro</label>
+                        <p-autocomplete [(ngModel)]="entidade.bairro" [suggestions]="listaBairros" optionLabel="descricao" [dropdown]="true" required="true"
+                            name="bairro" placeholder="Buscar" (completeMethod)="pesquisarBairro($event)" [disabled]="consulta"/>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-9">
+                        <label for="endereco">Endereço</label>
+                        <input id="endereco" pInputText type="text" name="endereco" [(ngModel)]="entidade.endereco"
+                            [disabled]="consulta" minlength="3" maxlength="100">
+                    </div>
+
                 </div>
 
-                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.sexo? 'campoInvalido' : 'campoValido'">
-                    <label>Sexo<span class="text-red-600">*</span></label>
-                    <p-select [options]="tiposSexo" [filter]="false" placeholder="Selecione" [required]="true"
-                        name="sexo" [(ngModel)]="entidade.sexo" [disabled]="consulta">
-                    </p-select>
+            </p-fluid>
+
+        </p-fieldset>
+
+        <p-fieldset legend="Eclesiástico">
+
+            <p-fluid>
+
+                <div class="grid grid-cols-12 gap-2">
+
+                    <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.status? 'campoInvalido' : 'campoValido'">
+                        <label>Status<span class="text-red-600">*</span></label>
+                        <p-select [options]="tiposStatus" [filter]="false" placeholder="Selecione" [required]="true"
+                            name="status" [(ngModel)]="entidade.status" [disabled]="consulta">
+                        </p-select>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="dataMembro">Data Membro</label>
+                        <p-datepicker name="dataMembro" [(ngModel)]="entidade.dataMembro" [showIcon]="true" inputId="dataMembro"
+                        [showOnFocus]="false" [disabled]="consulta" dateFormat="dd/mm/yy" />
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="dataBatismo">Data Batismo</label>
+                        <p-datepicker name="dataBatismo" [(ngModel)]="entidade.dataBatismo" [showIcon]="true" inputId="dataBatismo"
+                        [showOnFocus]="false" [disabled]="consulta" dateFormat="dd/mm/yy" />
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="dataConversao">Data Conversão</label>
+                        <p-datepicker name="dataConversao" [(ngModel)]="entidade.dataConversao" [showIcon]="true" inputId="dataConversao"
+                        [showOnFocus]="false" [disabled]="consulta" dateFormat="dd/mm/yy" />
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="dataSaida">Data Saída</label>
+                        <p-datepicker name="dataSaida" [(ngModel)]="entidade.dataSaida" [showIcon]="true" inputId="dataSaida"
+                        [showOnFocus]="false" [disabled]="consulta" dateFormat="dd/mm/yy" />
+                    </div>
+
                 </div>
 
-                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.dizimista? 'campoInvalido' : 'campoValido'">
-                    <label>Dizimista<span class="text-red-600">*</span></label>
-                    <p-select [options]="tiposDizimos" [filter]="false" placeholder="Selecione" [required]="true"
-                        name="dizimista" [(ngModel)]="entidade.dizimista" [disabled]="consulta">
-                    </p-select>
-                </div>
+            </p-fluid>
 
-                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && !entidade.status? 'campoInvalido' : 'campoValido'">
-                    <label>Status<span class="text-red-600">*</span></label>
-                    <p-select [options]="tiposStatus" [filter]="false" placeholder="Selecione" [required]="true"
-                        name="status" [(ngModel)]="entidade.status" [disabled]="consulta">
-                    </p-select>
-                </div>
+        </p-fieldset>
 
-            </div>
-
-        </p-fluid>
-
-    </p-fieldset>
-
-    <p-fieldset legend="Endereço">
-
-        <p-fluid>
-
-            <div class="grid grid-cols-12 gap-2">
-
-                <div class="col-span-12 md:col-span-3">
-                    <label>Bairro</label>
-                    <p-autocomplete [(ngModel)]="entidade.bairro" [suggestions]="listaBairros" optionLabel="descricao" [dropdown]="true" required="true"
-                        name="cargo" placeholder="Buscar" (completeMethod)="pesquisarCargo($event)" [disabled]="consulta"/>
-                </div>
-
-                <div class="col-span-12 md:col-span-6">
-                    <label for="endereco">Endereço<span class="text-red-600">*</span></label>
-                    <input id="endereco" pInputText type="text" name="endereco" [(ngModel)]="entidade.endereco"
-                        [disabled]="consulta" minlength="3" maxlength="100">
-                </div>
-
-                <div class="col-span-12 md:col-span-2">
-                    <label for="telefoneResidencial">Tel. Residencial</label>
-                    <p-inputMask id="telefoneResidencial" name="telefoneResidencial" [(ngModel)]="entidade.telefoneResidencial" [unmask]="true"
-                        mask="9999.9999" [disabled]="consulta"></p-inputMask>
-                </div>
-                
-
-            </div>
-
-        </p-fluid>
-
-    </p-fieldset>
+    </div>
 
 </form>

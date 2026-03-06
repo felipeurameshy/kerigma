@@ -14,6 +14,8 @@ import { ToastModule } from 'primeng/toast';
 import { FluidModule } from 'primeng/fluid';
 import { SelectModule } from 'primeng/select';
 import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
+import { InputMaskModule } from 'primeng/inputmask';
+import { DatePickerModule } from 'primeng/datepicker';
 
 import { BaseResourceFormComponent } from '../../../configuration/generic/components/base-resource-form.component';
 import { ErrorHandlerService } from '../../../configuration/core/error-handler.service';
@@ -29,7 +31,8 @@ import { BairroFilter } from '../../../filter/bairro.filter';
 @Component({
   selector: 'app-pessoa-form',
   imports: [FormsModule, CommonModule, MenuForm, InputTextModule, ButtonModule, TooltipModule,
-    FieldsetModule, BreadcrumbModule, ToastModule, FluidModule, SelectModule, AutoCompleteModule],
+    FieldsetModule, BreadcrumbModule, ToastModule, FluidModule, SelectModule, AutoCompleteModule, 
+    InputMaskModule, DatePickerModule],
   templateUrl: './pessoa-form.html',
   styleUrl: './pessoa-form.scss',
 })
