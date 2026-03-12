@@ -1,11 +1,114 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { FieldsetModule } from 'primeng/fieldset';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ToastModule } from 'primeng/toast';
+import { FluidModule } from 'primeng/fluid';
+import { AutoCompleteCompleteEvent, AutoCompleteModule } from 'primeng/autocomplete';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { DatePickerModule } from 'primeng/datepicker';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { SelectModule } from 'primeng/select';
+
+import { BaseResourceFormComponent } from '../../../configuration/generic/components/base-resource-form.component';
+import { ErrorHandlerService } from '../../../configuration/core/error-handler.service';
+import { MenuForm } from '../../../components/menu-form/menu-form';
+import { LoadingService } from '../../../configuration/core/loading.service';
+import { Categoria } from '../../../model/categoria';
+import { CategoriaFilter } from '../../../filter/categoria.filter';
+import { CategoriaService } from '../../../service/categoria.service';
+import { Despesa } from '../../../model/despesa';
+import { DespesaService } from '../../../service/despesa.service';
+import { Pessoa } from '../../../model/pessoa';
+import { PessoaFilter } from '../../../filter/pessoa.filter';
+import { PessoaService } from '../../../service/pessoa.service';
+import { Enums } from '../../../model/enums';
+import { Receita } from '../../../model/receita';
+import { ReceitaService } from '../../../service/receita.service';
+
 
 @Component({
   selector: 'app-receita-form',
-  imports: [],
+  imports: [FormsModule, CommonModule, MenuForm, InputTextModule, ButtonModule, TooltipModule,
+    FieldsetModule, BreadcrumbModule, ToastModule, FluidModule, AutoCompleteModule, InputGroupModule,
+    InputGroupAddonModule, DatePickerModule, InputNumberModule, SelectModule],
   templateUrl: './receita-form.html',
   styleUrl: './receita-form.scss',
 })
-export class ReceitaForm {
+export class ReceitaForm extends BaseResourceFormComponent<Receita> {
+
+  public listaCategorias: Categoria[] = [];
+  public listaPessoas: Pessoa[] = [];
+
+  constructor(
+    entidadeService: ReceitaService,
+    private categoriaService: CategoriaService,
+    private pessoaService: PessoaService,
+    route: ActivatedRoute,
+    router: Router,
+    messageService: MessageService,
+    title: Title,
+    errorHandler: ErrorHandlerService,
+    loadingService: LoadingService,
+    confirmation: ConfirmationService) {
+    super(
+      entidadeService,
+      "/receita/listar",
+      "Receita",
+      [{ label: 'Kerigma' }, { label: 'Financeiro' }, { label: 'Receita' }],
+      route,
+      router,
+      messageService,
+      title,
+      errorHandler,
+      loadingService,
+      confirmation
+    );
+  }
+
+  public pesquisarCategoria(event: AutoCompleteCompleteEvent){
+    const filtro = new CategoriaFilter();
+    filtro.descricao = event.query;
+    filtro.itensPorPagina = 10;
+    this.categoriaService.pesquisar(filtro)
+      .then( dados => {
+        if(dados.selecionados){
+          this.listaCategorias = dados.selecionados.map((item: any) => ({
+            id: item.id,
+            descricao: item.descricao
+          }));
+        }
+      })
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+      });
+  }
+
+  public pesquisarPessoa(event: AutoCompleteCompleteEvent){
+    const filtro = new PessoaFilter();
+    filtro.nome = event.query;
+    filtro.itensPorPagina = 10;
+    this.pessoaService.pesquisar(filtro)
+      .then( dados => {
+        if(dados.selecionados){
+          this.listaPessoas = dados.selecionados.map((item: any) => ({
+            id: item.id,
+            nome: item.nome
+          }));
+        }
+      })
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+      });
+  }
 
 }

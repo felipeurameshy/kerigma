@@ -45,7 +45,7 @@ export class ReceitaList extends BaseResourceListComponent<Receita, ReceitaFilte
       "/receita",
       "filtroReceita",
       new ReceitaFilter(),
-      "Lista de Bairros",
+      "Lista de Receitas",
       [{ label: 'Kerigma' }, { label: 'Financeiro' }, { label: 'Lista de Receitas' }],
       title,
       messageService,

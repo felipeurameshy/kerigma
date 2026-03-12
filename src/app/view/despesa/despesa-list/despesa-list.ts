@@ -45,7 +45,7 @@ export class DespesaList extends BaseResourceListComponent<Despesa, DespesaFilte
       "/despesa",
       "filtroDespesa",
       new DespesaFilter(),
-      "Lista de Bairros",
+      "Lista de Despesas",
       [{ label: 'Kerigma' }, { label: 'Financeiro' }, { label: 'Lista de Despesas' }],
       title,
       messageService,

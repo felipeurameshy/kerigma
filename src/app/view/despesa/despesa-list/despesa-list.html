@@ -61,7 +61,7 @@
             <tr (click)="selecionarEntidade(entidade)" [class]="entidade.id == idEntidade ?'linha-selecao-tabela':null">
                 <td>{{entidade.id}}</td>
                 <td>{{entidade.descricao}}</td>
-                <td>{{entidade.categoria}}</td>
+                <td>{{entidade.categoria.descricao}}</td>
                 <td>{{entidade.data | date:'dd/MM/yyyy'}}</td>
                 <td>{{entidade.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</td>
             </tr>

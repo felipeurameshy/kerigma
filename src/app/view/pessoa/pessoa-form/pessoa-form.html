@@ -71,7 +71,7 @@
                 <div class="grid grid-cols-12 gap-2">
 
                     <div class="col-span-12 md:col-span-6">
-                        <label for="email">E-mail<span class="text-red-600">*</span></label>
+                        <label for="email">E-mail</label>
                         <input id="email" pInputText type="text" name="email" [(ngModel)]="entidade.email"
                             [disabled]="consulta" minlength="3" maxlength="200">
                     </div>
@@ -108,7 +108,7 @@
 
                     <div class="col-span-12 md:col-span-3">
                         <label>Bairro</label>
-                        <p-autocomplete [(ngModel)]="entidade.bairro" [suggestions]="listaBairros" optionLabel="descricao" [dropdown]="true" required="true"
+                        <p-autocomplete [(ngModel)]="entidade.bairro" [suggestions]="listaBairros" optionLabel="descricao" [dropdown]="true"
                             name="bairro" placeholder="Buscar" (completeMethod)="pesquisarBairro($event)" [disabled]="consulta"/>
                     </div>
 

@@ -43,6 +43,14 @@ export class AppMenu {
                 ]
             },
             {
+                label: 'Financeiro',
+                visible: this.authorizationService.temPermissao('MENU_CADASTRO'),
+                items: [
+                    { label: 'Despesa', icon: 'pi pi-fw pi-id-card', routerLink: ['/despesa/listar'], visible: this.authorizationService.temPermissao('DESPESA_CONSULTAR') },
+                    { label: 'Receita', icon: 'pi pi-fw pi-id-card', routerLink: ['/receita/listar'], visible: this.authorizationService.temPermissao('RECEITA_CONSULTAR') },
+                ]
+            },
+            {
                 label: 'Segurança',
                 visible: this.authorizationService.temPermissao('MENU_SEGURANCA'),
                 items: [

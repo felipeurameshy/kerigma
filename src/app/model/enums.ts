@@ -29,4 +29,9 @@ export class Enums {
     { label: 'Não', value: 'NAO' }
   ];
 
+  public static StatusPagamento = [
+    { label: 'Sim', value: 'SIM' },
+    { label: 'Não', value: 'NAO' }
+  ];
+
 }

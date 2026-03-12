@@ -1,1 +1,62 @@
-<p>receita-form works!</p>
+<form #formulario="ngForm" autocomplete="off">
+
+    <app-menu-form [rotaListar]="rotaListar" [tipoMenu]="tipoMenu" [formulario]="formulario" (salvar)="salvar($event)"
+        (excluir)="excluir()" [itemsBreadCrumb]="items">
+    </app-menu-form>
+
+    <p-fieldset legend="Dados">
+
+        <p-fluid>
+
+            <div class="grid grid-cols-12 gap-2">
+
+                <div class="col-span-12 md:col-span-12" [ngClass]="formularioInvalido && formulario.form.controls['descricao'].invalid? 'campoInvalido':'campoValido'">
+                    <label for="descricao">Descrição<span class="text-red-600">*</span></label>
+                    <input id="descricao" pInputText type="text" name="descricao" [(ngModel)]="entidade.descricao"
+                        [disabled]="consulta" required minlength="3" maxlength="200">
+                </div>
+
+                <div class="col-span-12 md:col-span-6" [ngClass]="formularioInvalido && !entidade.categoria? 'campoInvalido' : 'campoValido'">
+                    <label>Categoria<span class="text-red-600">*</span></label>
+                    <p-inputGroup>
+                        <p-inputGroupAddon>
+                            <span>{{entidade.categoria ? entidade.categoria.id : '' }}</span>
+                        </p-inputGroupAddon>
+                        <p-autocomplete [(ngModel)]="entidade.categoria" [suggestions]="listaCategorias" optionLabel="descricao" [dropdown]="true" required="true"
+                            name="categoria" placeholder="Buscar" (completeMethod)="pesquisarCategoria($event)" />
+                    </p-inputGroup>
+                </div>
+
+                <div class="col-span-12 md:col-span-6">
+                    <label>Pessoa</label>
+                    <p-inputGroup>
+                        <p-inputGroupAddon>
+                            <span>{{entidade.pessoa ? entidade.pessoa.id : '' }}</span>
+                        </p-inputGroupAddon>
+                        <p-autocomplete [(ngModel)]="entidade.pessoa" [suggestions]="listaPessoas" optionLabel="nome" [dropdown]="true"
+                            name="pessoa" placeholder="Buscar" (completeMethod)="pesquisarPessoa($event)" />
+                    </p-inputGroup>
+                </div>
+
+                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && formulario.form.controls['data'].invalid? 'campoInvalido':'campoValido'">
+                    <label for="data">Data<span class="text-red-600">*</span></label>
+                    <p-datepicker name="data" [(ngModel)]="entidade.data" [showIcon]="true"
+                    inputId="data" [showOnFocus]="false" [disabled]="consulta" [required]="true"
+                    dateFormat="dd/mm/yy" />
+                </div>
+
+                <div class="col-span-12 md:col-span-2" [ngClass]="formularioInvalido && formulario.form.controls['valor'].invalid? 'campoInvalido':'campoValido'">
+                    <label>Valor<span class="campoObrigatorio">*</span></label>
+                    <p-inputNumber inputId="valor" name="valor" [(ngModel)]="entidade.valor"
+                        mode="decimal" [min]="0" [required]="true" [minFractionDigits]="2" [maxFractionDigits]="2"
+                        [useGrouping]="false" [disabled]="consulta">
+                    </p-inputNumber>
+                </div>
+
+            </div>
+
+        </p-fluid>
+
+    </p-fieldset>
+
+</form>
