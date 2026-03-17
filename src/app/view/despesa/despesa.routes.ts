@@ -3,6 +3,7 @@ import { SegurancaGuard } from '../../configuration/security/seguranca.guard';
 import { SegurancaDeactivateGuard } from '../../configuration/security/seguranca.deactivate.guard';
 import { DespesaForm } from './despesa-form/despesa-form';
 import { DespesaList } from './despesa-list/despesa-list';
+import { DespesaRelatorio } from './despesa-relatorio/despesa-relatorio';
 
 export default [
 
@@ -31,6 +32,12 @@ export default [
     component: DespesaForm,
     canActivate:[SegurancaGuard],
     data: { roles: ['DESPESA_CONSULTAR']}
+  },
+    { 
+    path: 'relatorio', 
+    component: DespesaRelatorio,
+    canActivate:[SegurancaGuard],
+    data: { roles: ['DESPESA_RELATORIO']}
   }
 
 ] as Routes;

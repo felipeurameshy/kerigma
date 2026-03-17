@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { BaseResourceService } from '../configuration/generic/service/base-resource.service';
 import { Despesa } from '../model/despesa';
 import { DespesaFilter } from '../filter/despesa.filter';
+import { RelatorioDespesaFilter } from '../filter/relatorio-despesa.filter';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,11 @@ export class DespesaService extends BaseResourceService<Despesa> {
         }
         return resultado;
       });
+  }
+
+  relatorioPorPeriodo(filtro: RelatorioDespesaFilter) {
+    return firstValueFrom(this.http.post<Blob>(`${this.apiPath}/relatorios/periodo`,
+    filtro, { responseType: 'blob' as 'json' }));
   }
 
 }

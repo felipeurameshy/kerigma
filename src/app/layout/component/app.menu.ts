@@ -62,7 +62,7 @@ export class AppMenu {
                 label: 'Relatórios',
                 visible: this.authorizationService.temPermissao('MENU_RELATORIO'),
                 items: [
-                    { label: 'Financeiro', icon: 'pi pi-fw pi-chart-line', routerLink: ['/pesquisa-desempenho/relatorio'], visible: this.authorizationService.temPermissao('PESQUISA_DESEMPENHO_RELATORIO') },
+                    { label: 'Despesa', icon: 'pi pi-fw pi-chart-line', routerLink: ['/despesa/relatorio'], visible: this.authorizationService.temPermissao('DESPESA_RELATORIO') },
                 ]
             }
         ];
