@@ -1,43 +1,35 @@
-<div class="col-12 md:col-12">
-    <div class="ajustes-breadcrumb">
-        <p-breadcrumb [model]="items"></p-breadcrumb>
-    </div>
+<p-breadcrumb [model]="items"></p-breadcrumb>
+
+<div class="pt-3">
+
+    <p-fieldset legend="Dados">
+
+        <p-fluid>
+
+            <div class="grid grid-cols-12 gap-2">
+
+                <div class="col-span-12 md:col-span-2">
+                    <label for="inicio">Data Início</label>
+                    <p-datepicker name="inicio" [(ngModel)]="filtro.inicio" [showIcon]="true"
+                    inputId="inicio" [showOnFocus]="false" dateFormat="dd/mm/yy" />
+                </div>
+
+                <div class="col-span-12 md:col-span-2">
+                    <label for="fim">Data Fim</label>
+                    <p-datepicker name="fim" [(ngModel)]="filtro.fim" [showIcon]="true"
+                    inputId="fim" [showOnFocus]="false" dateFormat="dd/mm/yy" />
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-12 gap-2 pt-3 pb-3">
+                <button label="Gerar" pButton type="button" icon="pi pi-file-pdf" pTooltip="Gerar" tooltipPosition="bottom"
+                    class="p-button-info w-30" (click)="gerarRelatorio()">
+                </button>
+            </div>
+
+        </p-fluid>
+
+    </p-fieldset>
+
 </div>
-
-<form #formulario="ngForm" autocomplete="off">
-
-    <div class="grid gap-2">
-
-        <p-fieldset legend="Dados">
-
-            <p-fluid>
-
-                <div class="grid grid-cols-12 gap-2">
-
-                    <div class="col-span-12 md:col-span-2">
-                        <label for="inicio">Data Início</label>
-                        <p-datepicker name="inicio" [(ngModel)]="filtro.inicio" [showIcon]="true"
-                        inputId="inicio" [showOnFocus]="false" dateFormat="dd/mm/yy" />
-                    </div>
-
-                    <div class="col-span-12 md:col-span-2">
-                        <label for="fim">Data Fim</label>
-                        <p-datepicker name="fim" [(ngModel)]="filtro.fim" [showIcon]="true"
-                        inputId="fim" [showOnFocus]="false" dateFormat="dd/mm/yy" />
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-12 gap-2">
-                    <button label="Salvar" pButton type="button" icon="pi pi-save" pTooltip="Salvar" tooltipPosition="bottom"
-                        class="p-button-info w-30" (click)="gerarRelatorio()">
-                    </button>
-                </div>
-
-            </p-fluid>
-
-        </p-fieldset>
-
-    </div>
-
-</form>
