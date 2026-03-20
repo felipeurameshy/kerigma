@@ -33,7 +33,7 @@ export default [
     canActivate:[SegurancaGuard],
     data: { roles: ['DESPESA_CONSULTAR']}
   },
-    { 
+  { 
     path: 'relatorio', 
     component: DespesaRelatorio,
     canActivate:[SegurancaGuard],

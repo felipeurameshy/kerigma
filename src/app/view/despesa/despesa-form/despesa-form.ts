@@ -77,6 +77,7 @@ export class DespesaForm extends BaseResourceFormComponent<Despesa> {
     const filtro = new CategoriaFilter();
     filtro.descricao = event.query;
     filtro.itensPorPagina = 10;
+    filtro.tipo = "DESPESA";
     this.categoriaService.pesquisar(filtro)
       .then( dados => {
         if(dados.selecionados){

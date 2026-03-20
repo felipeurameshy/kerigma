@@ -13,26 +13,26 @@ import { ToastModule } from 'primeng/toast';
 import { FluidModule } from 'primeng/fluid';
 import { DatePickerModule } from 'primeng/datepicker';
 
-import { RelatorioDespesaFilter } from '../../../filter/relatorio-despesa.filter';
-import { DespesaService } from '../../../service/despesa.service';
 import { ErrorHandlerService } from '../../../configuration/core/error-handler.service';
 import { LoadingService } from '../../../configuration/core/loading.service';
+import { RelatorioReceitaFilter } from '../../../filter/relatorio-receita.filter';
+import { ReceitaService } from '../../../service/receita.service';
 
 @Component({
-  selector: 'app-despesa-relatorio',
+  selector: 'app-receita-relatorio',
   imports: [FormsModule, CommonModule, InputTextModule, ButtonModule, TooltipModule,
     FieldsetModule, BreadcrumbModule, ToastModule, FluidModule, DatePickerModule],
-  templateUrl: './despesa-relatorio.html',
-  styleUrl: './despesa-relatorio.scss',
+  templateUrl: './receita-relatorio.html',
+  styleUrl: './receita-relatorio.scss',
 })
-export class DespesaRelatorio implements OnInit {
+export class ReceitaRelatorio implements OnInit {
 
   items: MenuItem[] = [];  
   tipoRelatorio = 'POR_PERIODO';
-  filtro = new RelatorioDespesaFilter();
+  filtro = new RelatorioReceitaFilter();
 
   constructor(
-    public entidadeService: DespesaService,
+    public entidadeService: ReceitaService,
     private title: Title,
     private errorHandler : ErrorHandlerService,
     private loadingService: LoadingService,
@@ -41,9 +41,9 @@ export class DespesaRelatorio implements OnInit {
 
   ngOnInit() {
     
-    this.items = [{label:'Kerigma'}, {label:'Relatórios'}, {label:'Despesa'}];
+    this.items = [{label:'Kerigma'}, {label:'Relatórios'}, {label:'Receita'}];
 
-    this.title.setTitle ('Kerigma - Relatório de Despesas');
+    this.title.setTitle ('Kerigma - Relatório de Receitas');
   }
 
   gerarRelatorio() {
@@ -62,7 +62,7 @@ export class DespesaRelatorio implements OnInit {
           if(relatorio){
             const url = window.URL.createObjectURL(relatorio);  
             var element = document.createElement("a");
-            element.download = "Relatorio de despesa por período detalhado.pdf";
+            element.download = "Relatorio de receita por período detalhado.pdf";
             element.href = url;
             element.click();      
             this.loadingService.hide(); 

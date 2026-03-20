@@ -30,6 +30,10 @@ export class CategoriaService extends BaseResourceService<Categoria> {
       params = params.set('descricao', filtro.descricao);
     }
 
+    if (filtro.tipo) {
+      params = params.set('tipo', filtro.tipo);
+    }
+
     return firstValueFrom(this.http.get(`${this.apiPath}/pesquisar`, { params }))
       .then((response: any) => {
         const resultado = {

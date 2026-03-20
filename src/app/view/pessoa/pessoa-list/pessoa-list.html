@@ -52,7 +52,9 @@
             <tr>
                 <th style="width:10%">ID</th>
                 <th style="width:15%">Cpf</th>
-                <th style="width:75%">Nome</th>
+                <th style="width:55%">Nome</th>
+                <th style="width:10%">Dizimista</th>
+                <th style="width:10%">Status</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entidade>
@@ -60,6 +62,8 @@
                 <td>{{entidade.id}}</td>
                 <td>{{entidade.cpf}}</td>
                 <td>{{entidade.nome}}</td>
+                <td>{{entidade.dizimista}}</td>
+                <td>{{entidade.status}}</td>
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">

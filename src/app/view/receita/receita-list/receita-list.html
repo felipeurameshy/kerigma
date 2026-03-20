@@ -2,7 +2,7 @@
 
 <app-menu-list [rotaPadrao]="rotaPadrao" [idEntidade]="idEntidade"
     [permissaoNovo]="authorizationService.temPermissao('RECEITA_INCLUIR')"
-    [permissaoEditar]="false"
+    [permissaoEditar]="authorizationService.temPermissao('RECEITA_ALTERAR')"
     [permissaoConsultar]="authorizationService.temPermissao('RECEITA_CONSULTAR')"
     [permissaoExcluir]="authorizationService.temPermissao('RECEITA_EXCLUIR')">
 </app-menu-list>
@@ -11,7 +11,7 @@
 
     <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-        <p-fieldset legend="Filtro" [toggleable]="true" [collapsed]="true">
+        <p-fieldset legend="Filtro" [toggleable]="true" [collapsed]="false">
 
             <p-fluid>
 
@@ -23,10 +23,44 @@
                             onkeypress="return event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="filtro.id">
                     </div>
 
-                    <div class="col-span-12 md:col-span-5">
+                    <div class="col-span-12 md:col-span-7">
                         <label for="descricao">Descrição</label>
                         <input id="descricao" name="descricao" pInputText type="text" [(ngModel)]="filtro.descricao"
                             maxlength="100">
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="dataInicio">Data Início</label>
+                        <p-datepicker name="dataInicio" [(ngModel)]="filtro.dataInicio" [showIcon]="true"
+                        inputId="dataInicio" [showOnFocus]="false" dateFormat="dd/mm/yy" />
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="dataFim">Data Fim</label>
+                        <p-datepicker name="dataFim" [(ngModel)]="filtro.dataFim" [showIcon]="true"
+                        inputId="dataFim" [showOnFocus]="false" dateFormat="dd/mm/yy" />
+                    </div>
+
+                    <div class="col-span-12 md:col-span-6">
+                        <label>Categoria</label>
+                        <p-inputGroup>
+                            <p-inputGroupAddon>
+                                <span>{{filtro.categoria ? filtro.categoria.id : '' }}</span>
+                            </p-inputGroupAddon>
+                            <p-autocomplete [(ngModel)]="filtro.categoria" [suggestions]="listaCategorias" optionLabel="descricao" [dropdown]="true"
+                                name="categoria" placeholder="Buscar" (completeMethod)="pesquisarCategoria($event)" />
+                        </p-inputGroup>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-6">
+                        <label>Pessoa</label>
+                        <p-inputGroup>
+                            <p-inputGroupAddon>
+                                <span>{{filtro.pessoa ? filtro.pessoa.id : '' }}</span>
+                            </p-inputGroupAddon>
+                            <p-autocomplete [(ngModel)]="filtro.pessoa" [suggestions]="listaPessoas" optionLabel="nome" [dropdown]="true"
+                                name="pessoa" placeholder="Buscar" (completeMethod)="pesquisarPessoa($event)" />
+                        </p-inputGroup>
                     </div>
 
                 </div>
@@ -51,8 +85,9 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="width:10%">ID</th>
-                <th style="width:60%">Descrição</th>
-                <th style="width:10%">Categoria</th>
+                <th style="width:20%">Descrição</th>
+                <th style="width:30%">Pessoa</th>
+                <th style="width:20%">Categoria</th>
                 <th style="width:10%">Data</th>
                 <th style="width:10%">Valor</th>
             </tr>
@@ -61,7 +96,8 @@
             <tr (click)="selecionarEntidade(entidade)" [class]="entidade.id == idEntidade ?'linha-selecao-tabela':null">
                 <td>{{entidade.id}}</td>
                 <td>{{entidade.descricao}}</td>
-                <td>{{entidade.categoria}}</td>
+                <td>{{entidade.pessoa?.nome}}</td>
+                <td>{{entidade.categoria?.descricao}}</td>
                 <td>{{entidade.data | date:'dd/MM/yyyy'}}</td>
                 <td>{{entidade.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</td>
             </tr>

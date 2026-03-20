@@ -36,18 +36,18 @@ export class AppMenu {
                 label: 'Cadastro',
                 visible: this.authorizationService.temPermissao('MENU_CADASTRO'),
                 items: [
-                    { label: 'Bairro', icon: 'pi pi-fw pi-id-card', routerLink: ['/bairro/listar'], visible: this.authorizationService.temPermissao('BAIRRO_CONSULTAR') },
+                    { label: 'Bairro', icon: 'pi pi-fw pi-building-columns', routerLink: ['/bairro/listar'], visible: this.authorizationService.temPermissao('BAIRRO_CONSULTAR') },
                     { label: 'Cargo', icon: 'pi pi-fw pi-id-card', routerLink: ['/cargo/listar'], visible: this.authorizationService.temPermissao('CARGO_CONSULTAR') },
-                    { label: 'Categoria', icon: 'pi pi-fw pi-id-card', routerLink: ['/categoria/listar'], visible: this.authorizationService.temPermissao('CATEGORIA_CONSULTAR') },
-                    { label: 'Pessoa', icon: 'pi pi-fw pi-id-card', routerLink: ['/pessoa/listar'], visible: this.authorizationService.temPermissao('PESSOA_CONSULTAR') }
+                    { label: 'Categoria', icon: 'pi pi-fw pi-book', routerLink: ['/categoria/listar'], visible: this.authorizationService.temPermissao('CATEGORIA_CONSULTAR') },
+                    { label: 'Pessoa', icon: 'pi-fw fa fa-solid fa-person', routerLink: ['/pessoa/listar'], visible: this.authorizationService.temPermissao('PESSOA_CONSULTAR') }
                 ]
             },
             {
                 label: 'Financeiro',
                 visible: this.authorizationService.temPermissao('MENU_CADASTRO'),
                 items: [
-                    { label: 'Despesa', icon: 'pi pi-fw pi-id-card', routerLink: ['/despesa/listar'], visible: this.authorizationService.temPermissao('DESPESA_CONSULTAR') },
-                    { label: 'Receita', icon: 'pi pi-fw pi-id-card', routerLink: ['/receita/listar'], visible: this.authorizationService.temPermissao('RECEITA_CONSULTAR') },
+                    { label: 'Despesa', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/despesa/listar'], visible: this.authorizationService.temPermissao('DESPESA_CONSULTAR') },
+                    { label: 'Receita', icon: 'pi pi-fw pi-money-bill', routerLink: ['/receita/listar'], visible: this.authorizationService.temPermissao('RECEITA_CONSULTAR') },
                 ]
             },
             {
@@ -62,7 +62,8 @@ export class AppMenu {
                 label: 'Relatórios',
                 visible: this.authorizationService.temPermissao('MENU_RELATORIO'),
                 items: [
-                    { label: 'Despesa', icon: 'pi pi-fw pi-chart-line', routerLink: ['/despesa/relatorio'], visible: this.authorizationService.temPermissao('DESPESA_RELATORIO') },
+                    { label: 'Despesa', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/despesa/relatorio'], visible: this.authorizationService.temPermissao('DESPESA_RELATORIO') },
+                    { label: 'Receita', icon: 'pi pi-fw pi-money-bill', routerLink: ['/receita/relatorio'], visible: this.authorizationService.temPermissao('RECEITA_RELATORIO') },
                 ]
             }
         ];

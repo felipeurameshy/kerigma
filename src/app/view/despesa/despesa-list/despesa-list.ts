@@ -13,6 +13,8 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ToastModule } from 'primeng/toast';
 import { FluidModule } from 'primeng/fluid';
+import { DatePickerModule } from 'primeng/datepicker';
+import { SelectModule } from 'primeng/select';
 
 import { MenuList } from '../../../components/menu-list/menu-list';
 import { BaseResourceListComponent } from '../../../configuration/generic/components/base-resource-list.component';
@@ -22,15 +24,18 @@ import { AuthorizationService } from '../../../configuration/security/authorizat
 import { Despesa } from '../../../model/despesa';
 import { DespesaFilter } from '../../../filter/despesa.filter';
 import { DespesaService } from '../../../service/despesa.service';
+import { Enums } from '../../../model/enums';
 
 @Component({
   selector: 'app-despesa-list',
   imports: [FormsModule, InputTextModule, ButtonModule, TableModule, TooltipModule, FieldsetModule, BreadcrumbModule,
-    ToastModule, MenuList, FluidModule, DatePipe, CurrencyPipe],
+    ToastModule, MenuList, FluidModule, DatePipe, CurrencyPipe, DatePickerModule, SelectModule],
   templateUrl: './despesa-list.html',
   styleUrl: './despesa-list.scss',
 })
 export class DespesaList extends BaseResourceListComponent<Despesa, DespesaFilter> {
+
+  public statusPagamento = Enums.StatusPagamento;
 
   constructor(
     entidadeService: DespesaService,

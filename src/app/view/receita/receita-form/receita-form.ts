@@ -26,12 +26,9 @@ import { LoadingService } from '../../../configuration/core/loading.service';
 import { Categoria } from '../../../model/categoria';
 import { CategoriaFilter } from '../../../filter/categoria.filter';
 import { CategoriaService } from '../../../service/categoria.service';
-import { Despesa } from '../../../model/despesa';
-import { DespesaService } from '../../../service/despesa.service';
 import { Pessoa } from '../../../model/pessoa';
 import { PessoaFilter } from '../../../filter/pessoa.filter';
 import { PessoaService } from '../../../service/pessoa.service';
-import { Enums } from '../../../model/enums';
 import { Receita } from '../../../model/receita';
 import { ReceitaService } from '../../../service/receita.service';
 

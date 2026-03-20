@@ -2,7 +2,7 @@
 
 <app-menu-list [rotaPadrao]="rotaPadrao" [idEntidade]="idEntidade"
     [permissaoNovo]="authorizationService.temPermissao('DESPESA_INCLUIR')"
-    [permissaoEditar]="false"
+    [permissaoEditar]="authorizationService.temPermissao('DESPESA_ALTERAR')"
     [permissaoConsultar]="authorizationService.temPermissao('DESPESA_CONSULTAR')"
     [permissaoExcluir]="authorizationService.temPermissao('DESPESA_EXCLUIR')">
 </app-menu-list>
@@ -11,7 +11,7 @@
 
     <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-        <p-fieldset legend="Filtro" [toggleable]="true" [collapsed]="true">
+        <p-fieldset legend="Filtro" [toggleable]="true" [collapsed]="false">
 
             <p-fluid>
 
@@ -27,6 +27,25 @@
                         <label for="descricao">Descrição</label>
                         <input id="descricao" name="descricao" pInputText type="text" [(ngModel)]="filtro.descricao"
                             maxlength="100">
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="dataVencimentoInicio">Data Venc. Início</label>
+                        <p-datepicker name="dataVencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio" [showIcon]="true"
+                        inputId="dataVencimentoInicio" [showOnFocus]="false" dateFormat="dd/mm/yy" />
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label for="dataVencimentoFim">Data Venc. Fim</label>
+                        <p-datepicker name="dataVencimentoFim" [(ngModel)]="filtro.dataVencimentoFim" [showIcon]="true"
+                        inputId="dataVencimentoFim" [showOnFocus]="false" dateFormat="dd/mm/yy" />
+                    </div>
+
+                    <div class="col-span-12 md:col-span-2">
+                        <label>Pago</label>
+                        <p-select [options]="statusPagamento" [filter]="false" placeholder="Selecione"
+                            name="pago" [(ngModel)]="filtro.pago">
+                        </p-select>
                     </div>
 
                 </div>
@@ -51,10 +70,13 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="width:10%">ID</th>
-                <th style="width:60%">Descrição</th>
-                <th style="width:10%">Categoria</th>
-                <th style="width:10%">Data</th>
+                <th style="width:30%">Descrição</th>
+                <th style="width:20%">Categoria</th>
                 <th style="width:10%">Valor</th>
+                <th style="width:10%">Data Venc.</th>
+                <th style="width:10%">Data Pagto</th>
+                <th style="width:10%">Pago</th>
+                
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-entidade>
@@ -62,8 +84,10 @@
                 <td>{{entidade.id}}</td>
                 <td>{{entidade.descricao}}</td>
                 <td>{{entidade.categoria.descricao}}</td>
-                <td>{{entidade.data | date:'dd/MM/yyyy'}}</td>
                 <td>{{entidade.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</td>
+                <td>{{entidade.dataVencimento | date:'dd/MM/yyyy'}}</td>
+                <td>{{entidade.dataPagamento | date:'dd/MM/yyyy'}}</td>
+                <td>{{entidade.pago}}</td>
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">

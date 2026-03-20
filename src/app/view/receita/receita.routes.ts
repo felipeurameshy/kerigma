@@ -3,6 +3,7 @@ import { SegurancaGuard } from '../../configuration/security/seguranca.guard';
 import { SegurancaDeactivateGuard } from '../../configuration/security/seguranca.deactivate.guard';
 import { ReceitaForm } from './receita-form/receita-form';
 import { ReceitaList } from './receita-list/receita-list';
+import { ReceitaRelatorio } from './receita-relatorio/receita-relatorio';
 
 export default [
 
@@ -31,6 +32,12 @@ export default [
     component: ReceitaForm,
     canActivate:[SegurancaGuard],
     data: { roles: ['RECEITA_CONSULTAR']}
+  },
+  { 
+    path: 'relatorio', 
+    component: ReceitaRelatorio,
+    canActivate:[SegurancaGuard],
+    data: { roles: ['RECEITA_RELATORIO']}
   }
 
 ] as Routes;
